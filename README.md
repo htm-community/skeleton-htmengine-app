@@ -232,7 +232,7 @@ timestamp separated by a single space.  The example below sends load average
 data using curl in an infinite loop at 5 second intervals:
 
 ```
-$ while true; do while true; do echo "`(uptime | awk -F'[a-z]:' '{ print $2}' | awk '{print $1}')` `date +%s`" | curl http://localhost:8080/load_average -X POST -d @-; sleep 5; done; done
+$ while true; do while true; do echo "`(uptime | awk -F'[a-z]:' '{ print $2}' | awk '{print $1}' | tr -d ',')` `date +%s`" | curl http://localhost:8080/load_average -X POST -d @-; sleep 5; done; done
 Saved /load_average 1.620000 @ 1434229721
 Saved /load_average 1.730000 @ 1434229726
 Saved /load_average 1.590000 @ 1434229731
