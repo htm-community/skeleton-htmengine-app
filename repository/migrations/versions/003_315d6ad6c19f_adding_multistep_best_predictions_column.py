@@ -19,11 +19,11 @@
 # http://numenta.org/licenses/
 # ----------------------------------------------------------------------
 
-"""timestatmp to datetime
+"""Adding multi_step_best_predictions column to metric_data table.
 
-Revision ID: 1d2eddc43366
-Revises: 57ab75d58038
-Create Date: 2014-12-30 15:58:52.062058
+Revision ID: 315d6ad6c19f
+Revises: 872a895b8e8
+Create Date: 2016-08-06 14:10:52.521030
 """
 
 from alembic import op
@@ -31,28 +31,15 @@ import sqlalchemy as sa
 
 
 # Revision identifiers, used by Alembic. Do not change.
-revision = '1d2eddc43366'
-down_revision = '57ab75d58038'
+revision = '315d6ad6c19f'
+down_revision = '872a895b8e8'
 
 
 
 def upgrade():
-  """ Change tables to use DATETIME column types instead of TIMESTAMP """
-  # Change tables to use DATETIME column types instead of TIMESTAMP
-  op.alter_column("instance_status_history", "timestamp",
-                  type_=sa.DATETIME,
-                  server_default=None,
-                  existing_nullable=False)
-
-  op.alter_column("metric", "last_timestamp",
-                  type_=sa.DATETIME,
-                  existing_nullable=True,
-                  existing_server_default=sa.text("NULL"))
-
-  op.alter_column("metric_data", "timestamp",
-                  type_=sa.DATETIME,
-                  existing_nullable=False)
-  ### end Alembic commands ###
+    """ Adds column 'multi_step_best_predictions' to metric_data table """
+    op.add_column('metric_data', sa.Column('multi_step_best_predictions',
+                                           sa.TEXT(), nullable=True))
 
 
 
