@@ -43,7 +43,7 @@ def upgrade():
   op.create_table('instance_status_history',
     sa.Column('server', sa.VARCHAR(length=100), server_default='',
               nullable=False),
-    sa.Column('timestamp', sa.TIMESTAMP(), server_default='0000-00-00 00:00:00',
+    sa.Column('timestamp', sa.TIMESTAMP(), server_default=None,
               nullable=False),
     sa.Column('status', sa.VARCHAR(length=32), server_default='',
               nullable=False),
